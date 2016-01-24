@@ -8,6 +8,7 @@ public class Program6<T> {
             next = nxt;
         }
     }
+    //adding a comment
     Entry<T> header, tail;
     int size;
     Program6() {
