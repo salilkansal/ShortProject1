@@ -95,7 +95,7 @@ class SortableList<T extends Comparable<? super T>>{
         header.next = mergeSort(header.next,size);
     }
 }
-public class Program3 extends SortableList{
+public class Program3 {
     public static void main(String[] args) {
         SortableList<Integer> lst = new SortableList<>();
         for(int i=10; i>0; i--) {
