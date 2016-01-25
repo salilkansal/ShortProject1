@@ -33,14 +33,10 @@ class SortableList<T extends Comparable<? super T>>{
         System.out.println();
     }
     private Entry<T> merge(Entry<T> list1, Entry<T> list2, int num) {
-        System.out.println("Start element of list 1 : "+list1.element);
-        System.out.println("Start element of list 2 : "+list2.element);
         int pos1 = 0;
         int pos2 = 0;
         int leftBound = num/2;
         int rightBound = num - (num/2);
-        System.out.println("Number of elements in list 1 : "+leftBound);
-        System.out.println("Number of elements in list 2 : "+rightBound);
         Entry<T> start = null;
         if(list1.element.compareTo(list2.element)<=0){
             start = list1;
@@ -53,11 +49,6 @@ class SortableList<T extends Comparable<? super T>>{
             list2 = list2.next;
         }
         Entry<T> temp = start;
-        System.out.println("Starting element of result : "+start.element);
-        System.out.println("Position 1 : "+pos1);
-        System.out.println("Position 2 : "+pos2);
-        System.out.println("Left Bound : "+leftBound);
-        System.out.println("Right Bound : "+rightBound);
         while(pos1<leftBound && pos2<rightBound){
             if(list1.element.compareTo(list2.element)<=0){
                 temp.next = list1;
@@ -85,7 +76,6 @@ class SortableList<T extends Comparable<? super T>>{
             list2 = list2.next;
         }
         temp.next = null;
-        System.out.println();
         return start;
     }
     private Entry<T> mergeSort(Entry<T> start,int num) {
@@ -111,8 +101,10 @@ public class Program3 extends SortableList{
         for(int i=10; i>0; i--) {
             lst.add(new Integer(i));
         }
+        System.out.print("Original list : ");
         lst.printList();
         lst.mergeSort();
+        System.out.print("Reverse list : ");
         lst.printList();
     }
 }
