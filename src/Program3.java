@@ -104,7 +104,7 @@ public class Program3 extends SortableList{
         System.out.print("Original list : ");
         lst.printList();
         lst.mergeSort();
-        System.out.print("Reverse list : ");
+        System.out.print("Sorted list : ");
         lst.printList();
     }
 }
