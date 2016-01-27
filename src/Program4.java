@@ -49,49 +49,40 @@ class BT {
     }
 
     private void inorder(BTNode r) {
-
-        if (r == null) {
+        if (r == null)
             return;
+        Stack<BTNode> st = new Stack<>();
+        while (r != null) {
+            st.push(r);
+            r = r.left;
         }
-        Stack<BTNode> st1 = new Stack<>();
-        BTNode ptr = r;
-        while (ptr != null) {
-            st1.push(ptr);
-            ptr = ptr.left;
-        }
-
-        while (st1.size() > 0) {
-
-            ptr = st1.pop();
-            System.out.print(ptr.data + " ");
-            if (ptr.right != null) {
-                ptr = ptr.right;
-
-                while (ptr != null) {
-                    st1.push(ptr);
-                    ptr = ptr.left;
+        while (!st.empty()) {
+            r = st.pop();
+            System.out.print(r.data + " ");
+            if (r.right != null) {
+                r = r.right;
+                while (r != null) {
+                    st.push(r);
+                    r = r.left;
                 }
             }
         }
     }
-
 
     public void preorder() {
         preorder(root);
     }
 
     private void preorder(BTNode r) {
-        Stack<BTNode> st1 = new Stack<>();
-        st1.push(null);
-        BTNode ptr = r;
-        while (ptr != null) {
-            System.out.print(ptr.data + " ");
-            if (ptr.right != null)
-                st1.push(ptr.right);
-            if (ptr.left != null)
-                ptr = ptr.left;
+        Stack<BTNode> st = new Stack<>();
+        while (r != null) {
+            System.out.print(r.data + " ");
+            if (r.right != null)
+                st.push(r.right);
+            if (r.left != null)
+                r = r.left;
             else
-                ptr = st1.pop();
+                r = st.pop();
         }
     }
 
