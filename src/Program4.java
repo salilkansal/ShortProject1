@@ -59,12 +59,10 @@ class BT {
         while (!st.empty()) {
             r = st.pop();
             System.out.print(r.data + " ");
-            if (r.right != null) {
-                r = r.right;
-                while (r != null) {
-                    st.push(r);
-                    r = r.left;
-                }
+            r = r.right;
+            while (r != null) {
+                st.push(r);
+                r = r.left;
             }
         }
     }
@@ -92,10 +90,10 @@ class BT {
     }
 
     private void postorder(BTNode r) {
+        if(r==null) return;
         Stack<BTNode> st1 = new Stack<>();
         Stack<BTNode> st2 = new Stack<>();
-        if (r != null)
-            st1.push(r);
+        st1.push(r);
         while (!st1.empty()) {
             BTNode temp = st1.pop();
             if (temp.left != null)
