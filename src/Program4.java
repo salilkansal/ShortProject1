@@ -75,6 +75,7 @@ class BT {
 
     private void preorder(BTNode r) {
         Stack<BTNode> st = new Stack<>();
+        st.push(null);
         while (r != null) {
             System.out.print(r.data + " ");
             if (r.right != null)
