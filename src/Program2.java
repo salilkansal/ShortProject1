@@ -6,15 +6,23 @@ public class Program2 {
     public static void main(String[] args) {
         LinkedList<Integer> ls1 = new LinkedList<>();
         LinkedList<Integer> ls2 = new LinkedList<>();
-        ls1.add(0);
-        ls1.add(0);
-        ls1.add(1);
-        ls2.add(0);
-        ls2.add(0);
-        ls2.add(1);
+
+        String num1 = "9999";
+        String num2 = "8888";
+
+        for (int i = num1.length() - 1; i >= 0; i--) {
+            ls1.add(Integer.parseInt(String.valueOf(num1.charAt(i))));
+        }
+
+        for (int i = num2.length() - 1; i >= 0; i--) {
+            ls2.add(Integer.parseInt(String.valueOf(num2.charAt(i))));
+        }
+
         int base = 10;
+
         LinkedList<Integer> addition = new LinkedList<>();
         LinkedList<Integer> subtraction = new LinkedList<>();
+
         add(ls1,ls2,addition,base);
         subtract(ls1,ls2,subtraction,base);
         System.out.println("Addition : "+addition);
@@ -49,7 +57,7 @@ public class Program2 {
         int borrow = 0;
         ListIterator<Integer> l1 = ls1.listIterator();
         ListIterator<Integer> l2 = ls2.listIterator();
-        while(l2.hasNext()){        // Assumed that x>y
+        while (l2.hasNext()) {
             int x = l1.next();
             int y = l2.next();
             if(x!=0){

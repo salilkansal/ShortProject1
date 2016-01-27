@@ -1,38 +1,41 @@
 import java.util.Stack;
 
-class BTNode
-{
+class BTNode {
     BTNode left, right;
     int data;
-    public BTNode(){
+
+    public BTNode() {
         left = null;
         right = null;
         data = 0;
     }
-    public BTNode(int n){
+
+    public BTNode(int n) {
         left = null;
         right = null;
         data = n;
     }
 }
 
-class BT
-{
+class BT {
     private BTNode root;
-    public BT(){
+
+    public BT() {
         root = null;
     }
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         return root == null;
     }
-    public void insert(int data){
+
+    public void insert(int data) {
         root = insert(root, data);
     }
-    private BTNode insert(BTNode node, int data){
+
+    private BTNode insert(BTNode node, int data) {
         if (node == null)
             node = new BTNode(data);
-        else
-        {
+        else {
             if (node.right == null)
                 node.right = insert(node.right, data);
             else
@@ -40,65 +43,90 @@ class BT
         }
         return node;
     }
-    public void inorder(){
+
+    public void inorder() {
         inorder(root);
     }
-    private void inorder(BTNode r)
-    {
-        if (r != null)
-        {
-            inorder(r.left);
-            System.out.print(r.data +" ");
-            inorder(r.right);
+
+    private void inorder(BTNode r) {
+
+        if (r == null) {
+            return;
+        }
+        Stack<BTNode> st1 = new Stack<>();
+        BTNode ptr = r;
+        while (ptr != null) {
+            st1.push(ptr);
+            ptr = ptr.left;
+        }
+
+        while (st1.size() > 0) {
+
+            ptr = st1.pop();
+            System.out.print(ptr.data + " ");
+            if (ptr.right != null) {
+                ptr = ptr.right;
+
+                while (ptr != null) {
+                    st1.push(ptr);
+                    ptr = ptr.left;
+                }
+            }
         }
     }
-    public void preorder(){
+
+
+    public void preorder() {
         preorder(root);
     }
-    private void preorder(BTNode r)
-    {
-        if (r != null)
-        {
-            System.out.print(r.data +" ");
-            preorder(r.left);
-            preorder(r.right);
+
+    private void preorder(BTNode r) {
+        Stack<BTNode> st1 = new Stack<>();
+        st1.push(null);
+        BTNode ptr = r;
+        while (ptr != null) {
+            System.out.print(ptr.data + " ");
+            if (ptr.right != null)
+                st1.push(ptr.right);
+            if (ptr.left != null)
+                ptr = ptr.left;
+            else
+                ptr = st1.pop();
         }
     }
-    public void postorder(){
+
+    public void postorder() {
         postorder(root);
     }
-    private void postorder(BTNode r)
-    {
+
+    private void postorder(BTNode r) {
         Stack<BTNode> st1 = new Stack<>();
         Stack<BTNode> st2 = new Stack<>();
         if (r != null)
             st1.push(r);
-        while(!st1.empty()){
+        while (!st1.empty()) {
             BTNode temp = st1.pop();
-            if(temp.left!=null)
+            if (temp.left != null)
                 st1.push(temp.left);
-            if(temp.right!=null)
+            if (temp.right != null)
                 st1.push(temp.right);
             st2.push(temp);
         }
-        while(!st2.empty())
-            System.out.print(st2.pop().data+" ");
+        while (!st2.empty())
+            System.out.print(st2.pop().data + " ");
     }
 }
 
-public class Program4
-{
-    public static void main(String[] args)
-    {
+public class Program4 {
+    public static void main(String[] args) {
         BT bt = new BT();
-        for(int i=1;i<11;i++)
+        for (int i = 1; i < 11; i++)
             bt.insert(new Integer(i));
-        System.out.print("\nPost order : ");
+        System.out.print("Post order : ");
         bt.postorder();
         System.out.print("\nPre order : ");
         bt.preorder();
         System.out.print("\nIn order : ");
         bt.inorder();
-        System.out.println();
     }
 }

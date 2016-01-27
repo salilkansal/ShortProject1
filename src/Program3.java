@@ -1,12 +1,4 @@
 class SortableList<T extends Comparable<? super T>>{
-    private class Entry<T> {
-        T element;
-        Entry<T> next;
-        Entry(T x, Entry<T> nxt) {
-            element = x;
-            next = nxt;
-        }
-    }
     Entry<T> header, tail;
     int size;
     SortableList() {
@@ -14,6 +6,7 @@ class SortableList<T extends Comparable<? super T>>{
         tail = null;
         size = 0;
     }
+
     public void add(T x) {
         if(tail == null) {
             header.next = new Entry<>(x, header.next);
@@ -24,6 +17,7 @@ class SortableList<T extends Comparable<? super T>>{
         }
         size++;
     }
+
     public void printList() {
         Entry<T> x = header.next;
         while(x != null) {
@@ -32,6 +26,7 @@ class SortableList<T extends Comparable<? super T>>{
         }
         System.out.println();
     }
+
     private Entry<T> merge(Entry<T> list1, Entry<T> list2, int num) {
         int pos1 = 0;
         int pos2 = 0;
@@ -78,6 +73,7 @@ class SortableList<T extends Comparable<? super T>>{
         temp.next = null;
         return start;
     }
+
     private Entry<T> mergeSort(Entry<T> start,int num) {
         if(num<2)
             return start;
@@ -91,15 +87,26 @@ class SortableList<T extends Comparable<? super T>>{
         ptrMiddle = mergeSort(ptrMiddle,num-(num/2));
         return merge(start,ptrMiddle,num);
     }
+
     public <T extends Comparable<? super T>> void mergeSort() {
         header.next = mergeSort(header.next,size);
+    }
+
+    private class Entry<T> {
+        T element;
+        Entry<T> next;
+
+        Entry(T x, Entry<T> nxt) {
+            element = x;
+            next = nxt;
+        }
     }
 }
 public class Program3 {
     public static void main(String[] args) {
         SortableList<Integer> lst = new SortableList<>();
         for(int i=10; i>0; i--) {
-            lst.add(new Integer(i));
+            lst.add(i);
         }
         System.out.print("Original list : ");
         lst.printList();
