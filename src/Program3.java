@@ -32,7 +32,7 @@ class SortableList<T extends Comparable<? super T>>{
         int pos2 = 0;
         int leftBound = num/2;
         int rightBound = num - (num/2);
-        Entry<T> start = null;
+        Entry<T> start;
         if(list1.element.compareTo(list2.element)<=0){
             start = list1;
             pos1++;
@@ -88,7 +88,7 @@ class SortableList<T extends Comparable<? super T>>{
         return merge(start,ptrMiddle,num);
     }
 
-    public <T extends Comparable<? super T>> void mergeSort() {
+    public void mergeSort() {
         header.next = mergeSort(header.next,size);
     }
 
