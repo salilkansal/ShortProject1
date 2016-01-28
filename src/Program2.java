@@ -1,3 +1,6 @@
+/*
+functions for adding and subtracting large numbers where each digit is stored as a separate node of the list
+ */
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;

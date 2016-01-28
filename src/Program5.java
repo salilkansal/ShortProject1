@@ -1,3 +1,7 @@
+/*
+Extend the "unzip" algorithm to "multiUnzip" on the SinglyLinkedList class
+
+ */
 import java.util.Scanner;
 
 class Entry<T> {

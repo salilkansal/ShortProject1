@@ -1,3 +1,6 @@
+/*
+Merge sort algorithm that works on linked lists
+ */
 class SortableList<T extends Comparable<? super T>>{
     Entry<T> header, tail;
     int size;

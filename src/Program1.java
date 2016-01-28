@@ -1,3 +1,5 @@
+/*Implementing union, intersection, and set difference functions of the sets for two sorted linked lists
+*/
 
 import java.util.*;
 
@@ -22,18 +24,25 @@ public class Program1 {
         System.out.println("Set Difference : " + setDifference);
     }
 
+    /*  element1-contains current value of list1
+        element2-contains current value of list2
+        advance1-specify whether list1 pointer should be incremented
+        advance2-specify whether list2 pointer should be incremented
 
+     */
     public static <T extends Comparable<? super T>> void findIntersection(List<T> ls1, List<T> ls2, List<T> intersection) {
         ListIterator<T> lstIter1 = ls1.listIterator();
         ListIterator<T> lstIter2 = ls2.listIterator();
-        T element1 = null, element2 = null;
+        T element1 = null;
+        T element2 = null;
         Boolean advance1 = true, advance2 = true;
-        while (lstIter1.hasNext() && lstIter2.hasNext()) {
+
+        while (lstIter1.hasNext() && lstIter2.hasNext()) {//iterate both lists till either of them ends
             if (advance1)
                 element1 = lstIter1.next();
             if (advance2)
                 element2 = lstIter2.next();
-            if (element1.compareTo(element2) == 0) {
+            if (element1.compareTo(element2) == 0) {//if element is common in both the lists, add it to the intersection list
                 intersection.add(element1);
                 advance1 = true;
                 advance2 = true;
@@ -45,7 +54,7 @@ public class Program1 {
                 advance2 = true;
             }
         }
-        if (lstIter1.hasNext() && advance1) {
+        if (lstIter1.hasNext() && advance1) {//comparing rest of the elements in the list
             element1 = lstIter1.next();
             if (element1.compareTo(element2) == 0)
                 intersection.add(element1);
@@ -57,62 +66,60 @@ public class Program1 {
     }
 
 
-    public static <T extends Comparable<? super T>> void findUnion(List<T> ls1,List<T> ls2,List<T> union){
-        Iterator<T> litr1 = ls1.iterator();
-        Iterator<T> litr2 = ls2.iterator();
-        T element1=null, element2=null;
-        Boolean adv1 = true, adv2 = true;
-        while(litr1.hasNext()&&litr2.hasNext()){
-            if (adv1)
-                element1 = litr1.next();
-            if (adv2)
-                element2 = litr2.next();
-            if(element1.compareTo(element2)==0){
+    public static <T extends Comparable<? super T>> void findUnion(List<T> ls1, List<T> ls2, List<T> union) {
+        Iterator<T> lstIter1 = ls1.iterator();
+        Iterator<T> lstIter2 = ls2.iterator();
+        T element1 = null, element2 = null;
+        Boolean advance1 = true, advance2 = true;
+        while (lstIter1.hasNext() && lstIter2.hasNext()) {
+            if (advance1)
+                element1 = lstIter1.next();
+            if (advance2)
+                element2 = lstIter2.next();
+            if (element1.compareTo(element2) == 0) {//if both lists have the same element add any one to the union list
                 union.add(element1);
-                adv1 = true;
-                adv2 = true;
-            }
-            else if(element1.compareTo(element2)<0){
+                advance1 = true;
+                advance2 = true;
+            } else if (element1.compareTo(element2) < 0) {
                 union.add(element1);
-                adv1 = true;
-                adv2 = false;
-            }
-            else{
+                advance1 = true;
+                advance2 = false;
+            } else {
                 union.add(element2);
-                adv2 = true;
-                adv1 = false;
+                advance2 = true;
+                advance1 = false;
             }
         }
-        while (litr1.hasNext())
-            union.add(litr1.next());
-        while (litr2.hasNext())
-            union.add(litr2.next());
+        while (lstIter1.hasNext())
+            union.add(lstIter1.next());
+        while (lstIter2.hasNext())
+            union.add(lstIter2.next());
     }
 
     public static <T extends Comparable<? super T>> void findSetDifference(List<T> ls1, List<T> ls2, List<T> setDifference) {
-        ListIterator<T> litr1 = ls1.listIterator();
-        ListIterator<T> litr2 = ls2.listIterator();
+        ListIterator<T> lstIter1 = ls1.listIterator();
+        ListIterator<T> lstIter2 = ls2.listIterator();
         T element1 = null, element2 = null;
-        Boolean adv1 = true, adv2 = true;
-        while (litr1.hasNext() && litr2.hasNext()) {
-            if (adv1)
-                element1 = litr1.next();
-            if (adv2)
-                element2 = litr2.next();
-            if (element1.compareTo(element2) < 0) {
+        Boolean advance1 = true, advance2 = true;
+        while (lstIter1.hasNext() && lstIter2.hasNext()) {
+            if (advance1)
+                element1 = lstIter1.next();
+            if (advance2)
+                element2 = lstIter2.next();
+            if (element1.compareTo(element2) < 0) {//add only those elements to the list that are in list1 and not in list2
                 setDifference.add(element1);
-                adv1 = true;
-                adv2 = false;
+                advance1 = true;
+                advance2 = false;
             } else if (element1.compareTo(element2) > 0) {
-                adv1 = false;
-                adv2 = true;
-            } else {
-                adv1 = true;
-                adv2 = true;
+                advance1 = false;
+                advance2 = true;
+            } else {//when an element is common to both the lists then leave that element
+                advance1 = true;
+                advance2 = true;
             }
         }
-        while (litr1.hasNext()) {
-            element1 = litr1.next();
+        while (lstIter1.hasNext()) {
+            element1 = lstIter1.next();
             if (element1.compareTo(element2) != 0)
                 setDifference.add(element1);
         }
