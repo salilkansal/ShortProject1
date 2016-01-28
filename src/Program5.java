@@ -54,47 +54,47 @@ class State<E> {
 
 }
 
-class Unzipper<E>{
+class Unzipper<E> {
     State<E>[] states;
 
-    Unzipper(int k){
+    Unzipper(int k) {
         states = new State[k];
-        for(int i = 0; i<states.length;i++){
+        for (int i = 0; i < states.length; i++) {
             states[i] = new State<>();
         }
     }
-    void multiUnzip(SinglyLinkedList<E> originalList){
+
+    void multiUnzip(SinglyLinkedList<E> originalList) {
         int currState = 0;
 
         Entry<E> ptr = originalList.header.next;
 
-        while (ptr!=null){
-            System.out.println(currState);
+        while (ptr != null) {
+            System.out.println("State:" + currState);
+            System.out.println("Ptr.element: " + ptr.element);
             states[currState].list.add(ptr.element);
-            changeState(currState);
-            if(currState<states.length)
+            if (currState < states.length-1)
                 currState++;
             else
-                currState=0;
+                currState = 0;
+            ptr = ptr.next;
         }
 
-        System.out.println(states);
+        for(State<E> myState: states){
+            myState.list.printList();
+        }
     }
 
-    State<E> changeState(int i){
-        if(i<states.length)
-            return states[i+1];
-        else return states[0];
-    }
+
 }
 
 
 public class Program5 {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
-        for(int i=1;i<11;i++){
+        for (int i = 1; i < 11; i++) {
             list.add(i);
         }
         Unzipper<Integer> unzip = new Unzipper<>(2);
