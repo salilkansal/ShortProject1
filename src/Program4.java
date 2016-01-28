@@ -116,6 +116,7 @@ public class Program4 {
         BT bt = new BT();
         for (int i = 1; i < 11; i++)
             bt.insert(new Integer(i));
+        System.out.println("Traversal without using recursion of a Binary Tree");
         System.out.print("Post order : ");
         bt.postorder();
         System.out.print("\nPre order : ");

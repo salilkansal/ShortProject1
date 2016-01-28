@@ -10,7 +10,6 @@ public class Program2 {
     public static void main(String[] args) {
         LinkedList<Integer> ls1 = new LinkedList<>();
         LinkedList<Integer> ls2 = new LinkedList<>();
-
         String num1 = "9999";//sample inputs taken in String form
         String num2 = "8888";
 
@@ -22,6 +21,8 @@ public class Program2 {
             ls2.add(Integer.parseInt(String.valueOf(num2.charAt(i))));
         }
 
+        System.out.println("Num 1: "+ ls1);
+        System.out.println("Num 2: "+ ls2);
         int base = 10;
 
         LinkedList<Integer> addition = new LinkedList<>();
