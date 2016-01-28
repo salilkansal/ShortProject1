@@ -4,7 +4,7 @@ Implement a recursive algorithm without recursion, by using a stack to simulate 
  */
 import java.util.Stack;
 
-class BTNode {
+class BTNode { //Node of a Binary Tree
     BTNode left, right;
     int data;
 
@@ -21,7 +21,7 @@ class BTNode {
     }
 }
 
-class BT {
+class BT {  //Binary Tree Class
     private BTNode root;
 
     public BT() {
@@ -52,21 +52,21 @@ class BT {
         inorder(root);
     }
 
-    private void inorder(BTNode r) {
-        if (r == null)
+    private void inorder(BTNode node) { //have a stack holding the left child values.
+        if (node == null)
             return;
         Stack<BTNode> st = new Stack<>();
-        while (r != null) {
-            st.push(r);
-            r = r.left;
+        while (node != null) {
+            st.push(node);
+            node = node.left;
         }
-        while (!st.empty()) {
-            r = st.pop();
-            System.out.print(r.data + " ");
-            r = r.right;
-            while (r != null) {
-                st.push(r);
-                r = r.left;
+        while (!st.empty()) { //pop from the stack and print that element
+            node = st.pop();
+            System.out.print(node.data + " ");
+            node = node.right;
+            while (node != null) {
+                st.push(node); //push right child into stack and then keep pushing all left child's of that.
+                node = node.left;
             }
         }
     }
@@ -75,8 +75,8 @@ class BT {
         preorder(root);
     }
 
-    private void preorder(BTNode r) {
-        Stack<BTNode> st = new Stack<>();
+    private void preorder(BTNode r) { //keep printing the left most elements until we get null and pushing the right child into the stack
+        Stack<BTNode> st = new Stack<>();//if right child has a left child then do the same for that
         st.push(null);
         while (r != null) {
             System.out.print(r.data + " ");
@@ -93,7 +93,7 @@ class BT {
         postorder(root);
     }
 
-    private void postorder(BTNode r) {
+    private void postorder(BTNode r) { //we have two stacks for post order, one for each child
         if(r==null) return;
         Stack<BTNode> st1 = new Stack<>();
         Stack<BTNode> st2 = new Stack<>();

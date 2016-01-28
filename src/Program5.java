@@ -41,7 +41,7 @@ class SinglyLinkedList<T> {
     }
 }
 
-class State<E> {
+class State<E> { //state class for the finite state machine
     SinglyLinkedList<E> list;
     public State() {
         list = new SinglyLinkedList<>();
@@ -51,19 +51,19 @@ class State<E> {
 class Unzipper<E> {
     State<E>[] states;
     Unzipper(int k) {
-        states = new State[k];
+        states = new State[k]; // creates k finite state machines
         for (int i = 0; i < states.length; i++)
             states[i] = new State<>();
     }
     void multiUnzip(SinglyLinkedList<E> originalList) {
-        int currState = 0;
+        int currState = 0; //let the starting state be state 0
         Entry<E> ptr = originalList.header.next;
         while (ptr != null) {
-            states[currState].list.add(ptr.element);
-            currState = (currState+1)%states.length;
-            ptr = ptr.next;
+            states[currState].list.add(ptr.element); //keep adding the element to the current state list
+            currState = (currState+1)%states.length; //change state to the next state
+            ptr = ptr.next; //increment the pointer of input list
         }
-        for (int i = 1; i < states.length; i++)
+        for (int i = 1; i < states.length; i++) //finally merge the lists of each state
             states[i-1].list.tail.next = states[i].list.header.next;
         originalList.header = states[0].list.header;
     }

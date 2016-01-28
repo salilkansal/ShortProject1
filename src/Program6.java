@@ -1,3 +1,9 @@
+/*
+Write recursive and nonrecursive functions for the following tasks:
+   (i) reverse the order of elements of the SinglyLinkedList class
+   (ii) print the elements of the SinglyLinkedList class, in reverse order.
+   Write the code and annotate it with  proper loop invariants.
+ */
 import java.util.Stack;
 
 public class Program6<T> {
@@ -41,24 +47,23 @@ public class Program6<T> {
         System.out.println();
     }
 
-    void reverseList() {
-        Entry<T> x = header.next;
-        if (x != null) {
-            Entry<T> y = x, temp = x.next;
-            if (x != null) {
-                x.next = null;
-                while (temp != null) {
-                    x = temp;
-                    temp = x.next;
-                    x.next = y;
-                    y = x;
-                }
-                header.next = x;
+    void reverseList() { //reversing non-recursively
+        Entry<T> curr = header.next;
+        if (curr != null) { //loop till end is reached
+            Entry<T> prev = curr, next = curr.next;
+            curr.next = null;
+            while (next != null) {
+                curr = next;
+                next = curr.next;
+                curr.next = prev; //reversing the pointer
+                prev = curr; //incrementing the pointer
+                header.next = curr;
             }
         }
     }
 
     void printReverse() {
+        //add elements to stack and then pop till stack is empty and print the popped element
         Entry<T> x = header.next;
         if (x != null) {
             Stack<T> stack = new Stack<>();
@@ -71,7 +76,7 @@ public class Program6<T> {
         }
     }
 
-    void reverse() {
+    void reverse() { //helper function for reversing recursively
         Entry<T> x = header.next;
         if (x != null) {
             Entry<T> y = x.next;
@@ -79,25 +84,25 @@ public class Program6<T> {
         }
     }
 
-    void reverseRecursive(Entry<T> x, Entry<T> y) {
-        if (y == null) {
-            header.next = x;
+    private void reverseRecursive(Entry<T> prev, Entry<T> curr) {
+        if (curr == null) {
+            header.next = prev;
             return;
         }
-        reverseRecursive(y, y.next);
-        y.next = x;
-        x.next = null;
+        reverseRecursive(curr, curr.next); //call for next set of pointers
+        curr.next = prev; //reverse the pointer
+        prev.next = null;
     }
 
-    void printListReverse() {
+    public void printListReverse() { //helper function for printing list recursively
         Entry<T> x = header.next;
         printReverseRecursive(x);
     }
 
-    void printReverseRecursive(Entry<T> x) {
+    private void printReverseRecursive(Entry<T> x) {
         if (x == null)
             return;
-        printReverseRecursive(x.next);
+        printReverseRecursive(x.next); //first call for next element then print current element
         System.out.print(x.element + " ");
     }
 
@@ -108,7 +113,7 @@ public class Program6<T> {
         }
         Program6<Integer> lst = new Program6<>();
         for (int i = 1; i <= n; i++) {
-            lst.add(new Integer(i));
+            lst.add(i);
         }
         System.out.print("Original List : ");
         lst.printList();

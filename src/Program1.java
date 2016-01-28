@@ -1,7 +1,10 @@
 /*Implementing union, intersection, and set difference functions of the sets for two sorted linked lists
 */
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Program1 {
     public static void main(String[] args) {
@@ -24,7 +27,8 @@ public class Program1 {
         System.out.println("Set Difference : " + setDifference);
     }
 
-    /*  element1-contains current value of list1
+    /*
+        element1-contains current value of list1
         element2-contains current value of list2
         advance1-specify whether list1 pointer should be incremented
         advance2-specify whether list2 pointer should be incremented
