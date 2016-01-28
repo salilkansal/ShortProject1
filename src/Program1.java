@@ -5,7 +5,6 @@ public class Program1 {
     public static void main(String[] args) {
         LinkedList<Integer> ls1 = new LinkedList<>();
         LinkedList<Integer> ls2 = new LinkedList<>();
-
         for (int i = 0; i < 25; i++)  //list of numbers from 0 to 24
             ls1.add(i);
         for (int i = 1; i < 25; i += 2) //list of odd numbers from 0 to 24
